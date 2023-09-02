@@ -9,7 +9,9 @@
 	var	$window = $(window),
 		$body = $('body'),
 		$header = $('#header'),
-		$banner = $('#banner');
+		$banner = $('#banner'),
+		$form = $('#contactform'),
+		$result = $('#formresult');
 
 	// Breakpoints.
 		breakpoints({
@@ -140,6 +142,22 @@
 					if (event.keyCode == 27)
 						$menu._hide();
 
+			});
+
+		$form
+		    .on('submit',  function (e) {
+				const formData = $form.serialize();
+				e.preventDefault();
+				$result.html("Please wait...");
+				var posting = $.post("https://api.web3forms.com/submit", formData)
+				  .done(function(data){
+					  $result.hide();
+					})
+				  .fail(function(data){
+					  console.log(data);
+					  $result.html("Tuvimos un problema, por favor envía correo a errorslec@fectp.org");
+					  $result.addClass("fa-triangle-exclamation");
+				  })
 			});
 
 })(jQuery);
