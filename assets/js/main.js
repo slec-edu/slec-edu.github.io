@@ -148,16 +148,7 @@
 		    .on('submit',  function (e) {
 				const formData = $form.serialize();
 				e.preventDefault();
-				$result.html("Please wait...");
-				var posting = $.post("https://api.web3forms.com/submit", formData)
-				  .done(function(data){
-					  $result.hide();
-					})
-				  .fail(function(data){
-					  console.log(data);
-					  $result.html("Tuvimos un problema, por favor envía correo a errorslec@fectp.org");
-					  $result.addClass("fa-triangle-exclamation");
-				  })
+				var posting = $.post("https://api.web3forms.com/submit", formData);
 			});
 
 })(jQuery);
