@@ -148,7 +148,14 @@
 		    .on('submit',  function (e) {
 				const formData = $form.serialize();
 				e.preventDefault();
-				var posting = $.post("https://api.web3forms.com/submit", formData);
+				$result.html("Enviando").show(1000);
+				var posting = $.post("https://api.web3forms.com/submit", formData)
+					.always(function() {
+					$result.html("Gracias por su mensaje").hide(5000);
+					$('#name').val('');
+					$('#email').val('');
+					$('#message').val('');
+				});
 			});
 
 })(jQuery);
